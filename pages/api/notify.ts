@@ -4,7 +4,7 @@ type Data = {
   name: string;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
@@ -70,7 +70,7 @@ export default function handler(
     // create a new instance of telegram
     const bot = new Telegram(process.env.TG_TOKEN || "");
     // send the message to the bot
-    bot.sendMessage(-1001160820861, message);
+    await bot.sendMessage(-1001160820861, message);
     // send the response
     res.status(200).json({ name: "success" });
   }

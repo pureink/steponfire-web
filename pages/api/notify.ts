@@ -68,7 +68,7 @@ export default function handler(
     )}\n`;
 
     // create a new instance of telegram
-    const bot = new Telegram(process.env.TELEGRAM_TOKEN || "");
+    const bot = new Telegram(process.env.TG_TOKEN || "");
     // send the message to the bot
     bot.sendMessage(-1001160820861, message);
     // send the response

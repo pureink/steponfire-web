@@ -16,7 +16,7 @@ export default async function handler(
     let message = "🔥Step On Fire 快报🔥\n\n";
     message += `于${match.time}在${
       match.map
-    }进行的比赛Demo已解析完毕，下载链接为${cosUrl + match.demoName}\n`;
+    }结束的比赛Demo已解析完毕，下载链接为${cosUrl + match.demoName}\n`;
     message += `🏁本场比赛比分为${match.team2Score}:${match.team3Score}\n`;
     match.highlight.map((e: any) => {
       message += `${e.user}完成了${e.num}次${e.name}\n`;
@@ -27,7 +27,7 @@ export default async function handler(
 
     const adrplayer = players.sort((a: any, b: any) => b.damage - a.damage)[0];
     message += `💥ADR - ${adrplayer.name}造成了场均${
-      adrplayer.damage / adrplayer.totalRound
+      (adrplayer.damage / adrplayer.totalRound).toFixed(2)
     }的伤害\n`;
 
     const killer = players.sort((a: any, b: any) => b.kill - a.kill)[0];
@@ -46,7 +46,7 @@ export default async function handler(
     const utilityplayer = players.sort(
       (a: any, b: any) => b.utilityDamage - a.utilityDamage
     )[0];
-    message += `💪道具达人 - ${utilityplayer.name}造成了场均${utilityplayer.utilityDamage}点道具伤害\n`;
+    message += `💪道具达人 - ${utilityplayer.name}造成了${utilityplayer.utilityDamage}点道具伤害\n`;
 
     const flashplayer = players.sort(
       (a: any, b: any) => b.enemyFlashDuration - a.enemyFlashDuration

@@ -48,14 +48,14 @@ export default async function handler(
     )[0];
     message += `💪道具达人 - ${utilityplayer.name}造成了${utilityplayer.utilityDamage}点道具伤害\n`;
 
-    const flashplayer = players.filter((e)=>e.enemyFlashDuration).sort(
+    const flashplayer = players.filter((e: any)=>e.enemyFlashDuration).sort(
       (a: any, b: any) => b.enemyFlashDuration - a.enemyFlashDuration
     )[0];
     message += `🗯闪光达人 - ${
       flashplayer.name
     }共闪白敌人${flashplayer.enemyFlashDuration.toFixed(2)}秒\n`;
 
-    const flashteamplayer = players.filter((e)=>e.teamFlashDuration).sort(
+    const flashteamplayer = players.filter((e: any)=>e.teamFlashDuration).sort(
       (a: any, b: any) => b.teamFlashDuration - a.teamFlashDuration
     )[0];
     message += `😓闪兵一号 - ${

@@ -26,9 +26,9 @@ export default async function handler(
     message += `🏆MVP - ${mvp.name}获得了${mvp.mvp}个MVP\n`;
 
     const adrplayer = players.sort((a: any, b: any) => b.damage - a.damage)[0];
-    message += `💥ADR - ${adrplayer.name}造成了场均${
-      (adrplayer.damage / adrplayer.totalRound).toFixed(2)
-    }的伤害\n`;
+    message += `💥ADR - ${adrplayer.name}造成了场均${(
+      adrplayer.damage / adrplayer.totalRound
+    ).toFixed(2)}的伤害\n`;
 
     const killer = players.sort((a: any, b: any) => b.kill - a.kill)[0];
     message += `🦸我的超人 - ${killer.name}击杀了${killer.kill}个敌人\n`;
@@ -38,9 +38,9 @@ export default async function handler(
     )[0];
     message += `🎯爆头精英 - ${hskiller.name}获得了${hskiller.headShot}个爆头击杀\n`;
 
-    const entryKiller = players.filter((e: any)=>e.firstKill).sort(
-      (a: any, b: any) => b.firstKill - a.firstKill
-    )[0];
+    const entryKiller = players
+      .filter((e: any) => e.firstKill)
+      .sort((a: any, b: any) => b.firstKill - a.firstKill)[0];
     message += `🔫突破之最 - ${entryKiller.name}获得了${entryKiller.firstKill}个首杀\n`;
 
     const utilityplayer = players.sort(
@@ -48,25 +48,34 @@ export default async function handler(
     )[0];
     message += `💪道具达人 - ${utilityplayer.name}造成了${utilityplayer.utilityDamage}点道具伤害\n`;
 
-    const flashplayer = players.filter((e: any)=>e.enemyFlashDuration).sort(
-      (a: any, b: any) => b.enemyFlashDuration - a.enemyFlashDuration
-    )[0];
+    const flashplayer = players
+      .filter((e: any) => e.enemyFlashDuration)
+      .sort((a: any, b: any) => b.enemyFlashDuration - a.enemyFlashDuration)[0];
     message += `🗯闪光达人 - ${
       flashplayer.name
     }共闪白敌人${flashplayer.enemyFlashDuration.toFixed(2)}秒\n`;
 
-    const flashteamplayer = players.filter((e: any)=>e.teamFlashDuration).sort(
-      (a: any, b: any) => b.teamFlashDuration - a.teamFlashDuration
-    )[0];
+    const flashteamplayer = players
+      .filter((e: any) => e.teamFlashDuration)
+      .sort((a: any, b: any) => b.teamFlashDuration - a.teamFlashDuration)[0];
     message += `😓闪兵一号 - ${
       flashteamplayer.name
     }共闪白队友${flashteamplayer.teamFlashDuration.toFixed(2)}秒\n`;
+    const flashedplayer = players
+      .filter((e: any) => e.flashed)
+      .sort((a: any, b: any) => b.flashed - a.flashed)[0];
+    message += `🤦是迪迦么 - ${
+      flashedplayer.name
+    }被闪白了${flashedplayer.flashed.toFixed(2)}s\n`;
 
+    const udplayer = players
+      .filter((e: any) => e.hpLostByUd)
+      .sort((a: any, b: any) => b.hpLostByUd - a.hpLostByUd)[0];
+    message += `💣好吃就多吃点 - ${udplayer.name}受到了${udplayer.hpLostByUd}点道具伤害\n`;
     message += `更多详情请点击链接 https://sof.hezh.in/matches/${match.demoName.substring(
       0,
       match.demoName.length - 4
     )}\n`;
-
     // create a new instance of telegram
     const bot = new Telegram(process.env.TG_TOKEN || "");
     // send the message to the bot

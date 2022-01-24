@@ -38,7 +38,7 @@ export default async function handler(
     )[0];
     message += `🎯爆头精英 - ${hskiller.name}获得了${hskiller.headShot}个爆头击杀\n`;
 
-    const entryKiller = players.sort(
+    const entryKiller = players.filter((e: any)=>e.firstKill).sort(
       (a: any, b: any) => b.firstKill - a.firstKill
     )[0];
     message += `🔫突破之最 - ${entryKiller.name}获得了${entryKiller.firstKill}个首杀\n`;

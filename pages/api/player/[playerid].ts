@@ -1,7 +1,7 @@
 import { query } from "../../../lib/db";
 import escape from "sql-template-strings";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { cvt_64 } from "../../../lib/steamidconvert";
+import { cvt_str } from "../../../lib/steamidconvert";
 interface player {
   id: number;
   steam: string;
@@ -96,24 +96,35 @@ interface player {
 }
 
 module.exports = async (req: NextApiRequest, res: NextApiResponse) => {
-  let players: any = await query(escape`
-      SELECT *
-      FROM rankme
-      ORDER BY score DESC
-    `);
-  const steamArray: string = players
-    .map((a: player) => cvt_64(a.steam))
-    .reduce((a: string, b: string) => a + "," + b);
-  const res_steam = await fetch(
-    `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_API}&steamids=${steamArray}`
-  );
-  const steams: any = await res_steam.json();
-  for (let p of players) {
-    const find = steams.response.players.find(
-      (e: any) => e.steamid === cvt_64(p.steam)
+  const steamid = req.query.playerid;
+  if (typeof steamid === "string") {
+    const players: any = await query(escape`
+    SELECT *
+    FROM rankme
+    WHERE steam = ${cvt_str(steamid)}
+  `);
+    const res_steam = await fetch(
+      `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_API}&steamids=${steamid}`
     );
-    p.avatar = find.avatar;
-    p.personastate = find.personastate;
+    const steams: any = await res_steam.json();
+    if (players.length > 0) {
+      let player = players[0];
+      const find = steams.response.players[0];
+      player.avatar = find.avatarfull;
+      player.personastate = find.personastate;
+
+      const matches = await query(escape`
+        SELECT *
+        FROM player
+        WHERE steamId = ${cvt_str(steamid)}
+        ORDER BY time DESC
+        `);
+
+      res.status(200).json({ player, matches });
+    } else {
+      res.status(400).json({ error: "Player not found" });
+    }
+  } else {
+    res.status(400).json({ error: "Steamid required!" });
   }
-  res.status(200).json({ players });
 };

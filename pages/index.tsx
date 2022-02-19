@@ -1,61 +1,66 @@
-import type { NextPage } from "next";
 import useSWR from "swr";
-import { Box, Img, Flex, Tooltip } from "@chakra-ui/react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-} from "@chakra-ui/react";
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-const Home: NextPage = () => {
-  const i = "t2";
-  const { data, error } = useSWR("/api/player", fetcher);
-  if (data)
-    return (
-      <>
-        <Flex maxW="md" mx="auto" w="100%" px="4">
-          <Box w="50%">
-            <Flex flexDirection="column">
-              <Tooltip label="39%">
-                <Img src={`/models/${i}-head.png`} w="100%"></Img>
-              </Tooltip>
-              <Flex flexDirection="row">
-                <Img src={`/models/${i}-lh.png`} w="calc(7*100%/27)"></Img>
-                <Flex flexDirection="column" w="50%">
-                  <Img src={`/models/${i}-chest.png`}></Img>
-                  <Img src={`/models/${i}-belly.png`}></Img>
-                </Flex>
-                <Img src={`/models/${i}-rh.png`} w="calc(7*100%/27)"></Img>
-              </Flex>
-            </Flex>
+import { Box, Img, Flex, Text, Link } from "@chakra-ui/react";
+import { cvt_64 } from "../lib/steamidconvert";
+import Layout from "../components/layout";
 
-            <Flex flexDirection="row" justifyContent="center">
-              <Img src={`/models/${i}-ll.png`} w="calc(19*100%/54)"></Img>
-              <Img src={`/models/${i}-rl.png`} w="calc(19*100%/54)"></Img>
+function Home({ data }: { data: any }) {
+  return (
+    <Layout>
+      <Text textAlign="center">
+        总游玩时间：
+        {(
+          data.players
+            .map((p: any) => p.connected)
+            .reduce((a: any, b: any) => a + b) / 3600
+        ).toFixed(0) + " 小时"}
+      </Text>
+      <Text textAlign="center">玩家人数：{data.players.length + " 人"}</Text>
+      <Flex w="100%" px="4">
+        <Box mx="auto">
+          {data.players.map((p: any) => (
+            <Flex key={p.steam} my="4">
+              <Img
+                mr="4"
+                w="7"
+                h="7"
+                src={p.avatar}
+                rounded="md"
+                display="inline-block"
+              ></Img>
+
+              <Link
+                my="auto"
+                maxW="32"
+                overflow="auto"
+                href={`/player/${cvt_64(p.steam)}`}
+                display="inline-block"
+                whiteSpace="nowrap"
+                mx="2"
+              >
+                {p.name}
+              </Link>
+
+              <Text mx="2" my="auto">
+                {(p.kills / p.deaths).toFixed(2)}
+              </Text>
             </Flex>
-          </Box>
-          <Box w="50%">
-            {data.players.map((p: any) => (
-              <Box>
-                <Img src={p.avatar} display="inline-block"></Img>
-                <p>{p.name}</p>
-              </Box>
-            ))}
-          </Box>
-        </Flex>
-        <Box>
-          <p>111</p>
+          ))}
         </Box>
-      </>
-    );
-  else {
-    return <p>loading</p>;
-  }
-};
+      </Flex>
+    </Layout>
+  );
+}
+export async function getStaticProps() {
+  console.log(process.env.END_POINT + "/api/player/");
+  const res = await fetch(process.env.END_POINT + "/api/player/");
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+    revalidate: 60,
+  };
+}
 
 export default Home;

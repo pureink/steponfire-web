@@ -107,7 +107,24 @@ export function Card5e({ userid }: { userid: string }) {
                       <Text color="gray.400">负</Text>
                     )}
                   </Td>
-                  <Td textAlign="center">{match.score}</Td>
+                  <Td textAlign="center">
+                    <Flex flexDirection="column">
+                      <Text>{match.score}</Text>
+                      <Flex justifyContent="center">
+                        {match.settlement.map(
+                          (item: any, index: number) => (
+                            <Image
+                              h="3"
+                              src={item}
+                              key={index}
+                              alt="5e_settlement"
+                            />
+                          )
+                        )}
+                      </Flex>
+                    </Flex>
+                    
+                    </Td>
                   <Td fontFamily="serif" fontSize="xs" textAlign="center">
                     <Flex flexDirection="column">
                       <Text bg={match.map_color} mx="auto">

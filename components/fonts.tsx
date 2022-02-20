@@ -1,4 +1,4 @@
-import { Global } from '@emotion/react'
+import { Global } from "@emotion/react";
 
 const Fonts = () => (
   <Global
@@ -7,18 +7,11 @@ const Fonts = () => (
         font-family: 'Pixel';
         font-style: normal;
         font-weight: 500;
-        font-display: swap;
-        src: url('/pixel.ttf') format('truetype');
-      }
-      @font-face {
-        font-family: 'Pixel';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
+        font-display: fallback;
         src: url('/pixel.ttf') format('truetype');
       }
       `}
   />
-)
+);
 
-export default Fonts
+export default Fonts;

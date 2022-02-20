@@ -1,4 +1,3 @@
-import useSWR from "swr";
 import { Box, Img, Flex, Text, Link } from "@chakra-ui/react";
 import { cvt_64 } from "../lib/steamidconvert";
 import Layout from "../components/layout";
@@ -51,7 +50,6 @@ function Home({ data }: { data: any }) {
   );
 }
 export async function getStaticProps() {
-  console.log(process.env.END_POINT + "/api/player/");
   const res = await fetch(process.env.END_POINT + "/api/player/");
   const data = await res.json();
 

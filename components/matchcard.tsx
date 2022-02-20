@@ -105,6 +105,7 @@ export function MatchCard({ match }: { match: Match }) {
           >
             {new Date(match.time).toLocaleString()}
           </chakra.p>
+          <Link href={`https://demo-1257876674.cos.ap-beijing.myqcloud.com/${match.demoName}`}>
           <chakra.button
             px="2"
             bg="white"
@@ -122,6 +123,8 @@ export function MatchCard({ match }: { match: Match }) {
             DEMO
             <DownloadIcon />
           </chakra.button>
+          </Link>
+          
         </Flex>
       </Flex>
     </Flex>

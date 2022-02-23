@@ -1,4 +1,5 @@
 import { rand_md } from "../../lib/modelrandom";
+import { formatDateShort } from "../../lib/time";
 import {
   Box,
   Img,
@@ -71,7 +72,7 @@ function Home({ data }: { data: any }) {
         </Td>
         <Td>{`${match.kill}/${match.death}/${match.assist}`}</Td>
         <Td textAlign="center">{match.teamScore + ":" + match.enemyScore}</Td>
-        <Td>{new Date(match.time).toLocaleDateString("zh-CN")}</Td>
+        <Td>{formatDateShort(match.time)}</Td>
       </Tr>
     );
   }
@@ -90,7 +91,7 @@ function Home({ data }: { data: any }) {
       </Text>
       <Text textAlign="center">
         上次连接时间：
-        {new Date(data.player.lastconnect * 1000).toLocaleString("zh-CN")}
+        {new Date(data.player.lastconnect * 1000).toLocaleString()}
       </Text>
       <Flex my="2">
         <Flex flexDirection="column" px="2" w="25%" textAlign="center">

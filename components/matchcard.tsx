@@ -1,5 +1,6 @@
 import { Flex, Box, Link, chakra, Img, Text } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
+import formatDate from "../lib/time";
 type Match = {
   id: number;
   highlight: string;
@@ -103,28 +104,29 @@ export function MatchCard({ match }: { match: Match }) {
             maxH="50px"
             fontWeight="bold"
           >
-            {new Date(match.time).toLocaleString("zh-CN")}
+            {formatDate(match.time)}
           </chakra.p>
-          <Link href={`https://demo-1257876674.cos.ap-beijing.myqcloud.com/${match.demoName}`}>
-          <chakra.button
-            px="2"
-            bg="white"
-            fontSize="xs"
-            color="gray.900"
-            fontWeight="bold"
-            rounded="lg"
-            _hover={{
-              bg: "gray.200",
-            }}
-            _focus={{
-              bg: "gray.400",
-            }}
+          <Link
+            href={`https://demo-1257876674.cos.ap-beijing.myqcloud.com/${match.demoName}`}
           >
-            DEMO
-            <DownloadIcon />
-          </chakra.button>
+            <chakra.button
+              px="2"
+              bg="white"
+              fontSize="xs"
+              color="gray.900"
+              fontWeight="bold"
+              rounded="lg"
+              _hover={{
+                bg: "gray.200",
+              }}
+              _focus={{
+                bg: "gray.400",
+              }}
+            >
+              DEMO
+              <DownloadIcon />
+            </chakra.button>
           </Link>
-          
         </Flex>
       </Flex>
     </Flex>

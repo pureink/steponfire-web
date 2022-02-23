@@ -3,6 +3,7 @@ import React from "react";
 import { Divider, Box, Flex, Text, Img } from "@chakra-ui/react";
 import { PlayerMatch } from "../../components/playermatch";
 import Layout from "../../components/layout";
+import formatDate from "../../lib/time";
 function Match({ data }: { data: any }) {
   return (
     <Layout>
@@ -13,7 +14,7 @@ function Match({ data }: { data: any }) {
         </Text>
       </Flex>
       <Text textAlign="center">
-        {new Date(data.match.time).toLocaleString("zh-CN")}
+        {formatDate(data.match.time)}
       </Text>
       <Flex maxW="md" mx="auto" flexDirection="column" px="2">
         <Text my="auto" fontSize="4xl" mx="auto">

@@ -71,7 +71,7 @@ function Home({ data }: { data: any }) {
         </Td>
         <Td>{`${match.kill}/${match.death}/${match.assist}`}</Td>
         <Td textAlign="center">{match.teamScore + ":" + match.enemyScore}</Td>
-        <Td>{new Date(match.time).toLocaleDateString()}</Td>
+        <Td>{new Date(match.time).toLocaleDateString("zh-CN")}</Td>
       </Tr>
     );
   }
@@ -90,7 +90,7 @@ function Home({ data }: { data: any }) {
       </Text>
       <Text textAlign="center">
         上次连接时间：
-        {new Date(data.player.lastconnect * 1000).toLocaleString()}
+        {new Date(data.player.lastconnect * 1000).toLocaleString("zh-CN")}
       </Text>
       <Flex my="2">
         <Flex flexDirection="column" px="2" w="25%" textAlign="center">

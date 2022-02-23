@@ -103,7 +103,7 @@ export function MatchCard({ match }: { match: Match }) {
             maxH="50px"
             fontWeight="bold"
           >
-            {new Date(match.time).toLocaleString()}
+            {new Date(match.time).toLocaleString("zh-CN")}
           </chakra.p>
           <Link href={`https://demo-1257876674.cos.ap-beijing.myqcloud.com/${match.demoName}`}>
           <chakra.button

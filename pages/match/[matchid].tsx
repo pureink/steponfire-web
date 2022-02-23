@@ -13,7 +13,7 @@ function Match({ data }: { data: any }) {
         </Text>
       </Flex>
       <Text textAlign="center">
-        {new Date(data.match.time).toLocaleString()}
+        {new Date(data.match.time).toLocaleString("zh-CN")}
       </Text>
       <Flex maxW="md" mx="auto" flexDirection="column" px="2">
         <Text my="auto" fontSize="4xl" mx="auto">

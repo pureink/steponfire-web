@@ -18,7 +18,7 @@ function Match({ data }: { data: any }) {
       </Text>
       <Flex maxW="md" mx="auto" flexDirection="column" px="2">
         <Text my="auto" fontSize="4xl" mx="auto">
-          {data.match.team3Score + " : " + data.match.team2Score}
+          {data.match.team2Score + " : " + data.match.team3Score}
         </Text>
         <Flex textAlign="center">
           <Text flex="1">teamA</Text>

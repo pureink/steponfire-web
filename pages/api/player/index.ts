@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 module.exports = async (req: NextApiRequest, res: NextApiResponse) => {
   let players: any = await query(escape`
-      SELECT steam,name,score,kills,deaths
+      SELECT steam,name,score,kills,deaths,connected
       FROM rankme
       ORDER BY score DESC
     `);

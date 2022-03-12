@@ -18,7 +18,7 @@ function Match({ data }: { data: any }) {
   const pages = data.matches.map((m: any) => (
     <MatchCard match={m} key={m.demoName} />
   ));
-  for (let i = 1; i < pageIndex; i++) {
+  for (let i = 2; i < pageIndex; i++) {
     pages.push(<Page index={i} key={i} />);
   }
 

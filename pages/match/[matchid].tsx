@@ -69,7 +69,7 @@ export async function getStaticProps(context: any) {
   };
 }
 export async function getStaticPaths() {
-  const res = await fetch(process.env.END_POINT + "/api/match");
+  const res = await fetch(process.env.END_POINT + "/api/matches");
   const data = await res.json();
   const paths = data.matches.map((match: any) => ({
     params: { matchid: match.demoName.substring(0, match.demoName.length - 4) },

@@ -44,7 +44,7 @@ export function MatchCard({ match }: { match: Match }) {
         rounded="lg"
         overflow="hidden"
       >
-        <Box px="4" py="1" bg="#111">
+        <Box px="4" py="1" bg="rgba(0,0,0,0.8)">
           <Flex alignItems="center" justifyContent="space-between">
             <Img w="20" alt={match.map} src={`/map-badge/${match.map}.png`} />
             <Flex

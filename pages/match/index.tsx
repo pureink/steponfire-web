@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { MatchCard } from "../../components/matchcard";
 import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());

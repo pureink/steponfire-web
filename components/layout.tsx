@@ -1,7 +1,11 @@
 import { Box, Flex, Text, Link } from "@chakra-ui/react";
+import Head from 'next/head'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
+    <Head>
+      <title>Step On Fire</title>
+    </Head>
       <Box maxW="md" mx="auto">
         <Flex px="2" justifyContent="space-between" my="2">
           <Link href="/">

@@ -97,7 +97,7 @@ interface player {
 
 module.exports = async (req: NextApiRequest, res: NextApiResponse) => {
   let players: any = await query(escape`
-      SELECT *
+      SELECT steam,name,score
       FROM rankme
       ORDER BY score DESC
     `);

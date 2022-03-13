@@ -6,6 +6,7 @@ import {
   Box,
   StatHelpText,
   StatArrow,
+  Skeleton
 } from "@chakra-ui/react";
 import {
   Table,
@@ -17,6 +18,7 @@ import {
   Td,
   TableCaption,
 } from "@chakra-ui/react";
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export function Card5e({ userid }: { userid: string }) {
   const { data } = useSWR(`/api/third/5e?steamId=${userid}`, fetcher);
@@ -30,6 +32,7 @@ export function Card5e({ userid }: { userid: string }) {
             <Flex flexDirection="column" w="25%" my="auto">
               <Flex flexDirection="column">
                 <Image
+                  fallback={<Skeleton w="8" h="8" mx="auto"/>}
                   mx="auto"
                   rounded="md"
                   alt="5e_avatar"

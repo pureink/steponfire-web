@@ -236,19 +236,19 @@ function Home({ data }: { data: any }) {
       </Flex>
       <Tabs mx="auto" w="100%" boxShadow="md" rounded="md" my="4">
         <TabList>
+          <Tab>完美</Tab>
           <Tab>5E</Tab>
           <Tab>B5</Tab>
-          <Tab>完美</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Card5e userid={data.player.steam} />
+          <CardWm userid={data.player.steam} />
           </TabPanel>
           <TabPanel>
-            <CardB5 userid={data.player.steam} />
+          <Card5e userid={data.player.steam} />
           </TabPanel>
           <TabPanel>
-            <CardWm userid={data.player.steam} />
+          <CardB5 userid={data.player.steam} />
           </TabPanel>
         </TabPanels>
       </Tabs>

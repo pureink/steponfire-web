@@ -16,7 +16,7 @@ export default async function handler(
     let message = "🔥Step On Fire 快报🔥\n\n";
     message += `于${match.time}在${
       match.map
-    }结束的比赛Demo已解析完毕，下载链接为${cosUrl + match.demoName}\n`;
+    }开始的比赛Demo已解析完毕，下载链接为${cosUrl + match.demoName}\n`;
     message += `🏁本场比赛比分为${match.team2Score}:${match.team3Score}\n`;
     match.highlight.map((e: any) => {
       message += `${e.user}完成了${e.num}次${e.name}\n`;
